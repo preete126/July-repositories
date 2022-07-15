@@ -39,6 +39,8 @@
             gap: 15px;
             /* margin-left: 90px; */
             margin-top: 10px;
+            margin-bottom: 10px;
+
         }
     </style>
 </head>
@@ -48,13 +50,14 @@
     <main class=" main ">
         <div class="d-inline w-25 p-3 rounded-3"
             style="background-color: rgb(217,221,233); box-shadow: 0px 0px 5px white;">
+            <p style="font-size: 18px; color: black; font-family: Courier;">Select quantity first!!!</p>
             <button onclick="select()" class="btn btn-dark" id="display">Product</button>
             <div id="container" style="max-height: 380px;overflow-y: scroll;"></div>
-            <input type="number" id="quantity" class="mt-2">
+            <input type="number" id="quantity" class="mt-2" placeholder="Quantity">
             <input type="text" disabled placeholder="Amount: $" id="amount" class="mt-2 me-2">
             <button onclick="Save(event)" class="btn btn-success">Save</button>
         </div>
-        <section class=" w-50 rounded-3 p-3" style="background-color: rgb(217,221,233); box-shadow: 0px 0px 5px white;">
+        <section class=" w-50 rounded-3 p-3 " style="background-color: rgb(217,221,233); box-shadow: 0px 0px 5px white;">
 
 
             <div class="logo ps-5 mb-4">
@@ -87,7 +90,7 @@
                 <span>Total:$ </span>
                 <input type="text" disabled id="Total">
             </div>
-
+            <div class="text-center" style="font-family: Arial; color: black; padding-top: 25px;">Thanks for shopping at @PREETE ENTERPRISES </div>
         </section>
     </main>
 </body>
