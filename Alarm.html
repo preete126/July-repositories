@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reminder</title>
+</head>
+<body>
+   
+
+    <h1>
+        <span id="hrs">00</span>
+        <span>:</span>
+        <span id="min">00</span>
+        <span>:</span>
+        <span id="sec">00</span>
+    </h1>
+    <div>Reminder has been set to 
+        <span id="hrsR">00</span>
+        <span>:</span>
+        <span id="minR">00</span>
+        <span>:</span>
+        <span id="secR">00</span>
+    </div>
+    <input type="number" id="input1">
+    <input type="number" id="input2">
+    <input type="number" id="input3">
+
+    <button class="btn btn-success" onclick="setTime()">SetTime</button>
+
+
+</body>
+<script>
+    let input1 = document.getElementById("input1")
+    let input2 = document.getElementById("input2")
+    let input3 = document.getElementById("input3")
+
+    let hrs = document.getElementById("hrs")
+    let hrsR = document.getElementById("hrsR")
+    let minR = document.getElementById("minR")
+    let min = document.getElementById("min")
+    let sec = document.getElementById("sec")
+    let secR = document.getElementById("secR")
+
+        setInterval(function() {
+            let date = new Date();
+            hrs.innerHTML = date.getHours()
+            min.innerHTML = date.getMinutes()
+            sec.innerHTML = date.getSeconds()
+            
+            set()
+        }, 1000)
+        function setTime() {
+            hrsR.innerHTML = input1.value
+            minR.innerHTML = input2.value
+            secR.innerHTML = input3.value
+           
+
+        }
+        function set() {
+            date = new Date()
+
+            if(input1.value == date.getHours() && input2.value == date.getMinutes() && input3.value == date.getSeconds() ) {
+                alert(`The time is ${hrsR.innerHTML}: ${minR.innerHTML} : ${secR.innerHTML}  ` );
+                hrsR.innerHTML = "00";
+                minR.innerHTML = "00";
+                secR.innerHTML = "00";
+                input1.value = ""
+                input2.value = ""
+                input3.value = ""
+
+
+            }
+        }
+   
+</script>
+</html>

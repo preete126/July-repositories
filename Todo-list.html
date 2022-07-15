@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>to-do</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        .card-body {
+            width: 405px;
+            margin-top: 50px;
+
+        }
+
+        section {
+            margin: 70px 150px 0 150px;
+            padding-bottom: 100px;
+
+        }
+
+        .add-btn {
+            background-color: blueviolet;
+            margin-top: -3px;
+            /* height: 40px; */
+        }
+
+        .div {
+            padding: 12px;
+
+            width: 355px;
+            border: 1px solid whitesmoke;
+            background-color: seashell;
+        }
+
+        #input {
+            width: 305px;
+        }
+
+        .hover {
+            display: none;
+        }
+
+        .div:hover .hover {
+            display: block;
+            /* align-items: flex-end; */
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <div class="card bg-primary">
+            <div class="mx-auto  ">
+                <div class="card-body  bg-light  ps-4" id="card">
+                    <h3 class="pb-3">Todo App</h3>
+                    <input type="text" id="input" class="p-2 " placeholder="Add your new todo">
+                    <button onclick="add()" class="btn  add-btn text-white fw-bold fs-5 ps-2 pe-2 ">➕</button>
+                    <div id="parent-div"></div>
+                </div>
+                <div class="  bg-light  ps-4 mb-5 pb-4">
+                    <span style=" margin: 40px 75px 30px 10px;"> You have <SPan id="inc">0</SPan> pending <span
+                            id="multiple">task</span></span>
+                    <button type="reset" onclick="clearAll()" class="btn  add-btn text-white mt-2  ">Clear All</button>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</body>
+<script>
+    let a = 0;
+    let input = document.getElementById("input")
+    let parent_div = document.getElementById("parent-div")
+    let arr = []
+    let todo = JSON.parse(localStorage.getItem("todo"))
+    if (todo != null) {
+        arr = todo;
+    }
+    function add() {
+        a++
+        arr.push(input.value)
+        // input.value = ""
+        console.log(arr)
+        document.getElementById("inc").innerHTML = a
+
+        localStorage.setItem("todo", JSON.stringify(arr));
+
+        if (a > 1) {
+            document.getElementById("multiple").innerHTML = "tasks"
+        } else {
+            document.getElementById("multiple").innerHTML = "task"
+        }
+
+        if(input.value == "") {
+            a = 0
+            document.getElementById("divv").style.display = "none"
+            document.getElementById("inc").innerHTML = a
+
+        } else {
+            document.getElementById("inc").innerHTML = a
+        }
+        input.value = null
+        displayResult()
+
+
+    }
+    function displayResult() {
+
+        parent_div.innerHTML = " "
+        for (let index = 0; index < arr.length; index++) {
+            parent_div.innerHTML +=
+                `<div id = "divv">
+                <div class="div mt-3" id="div">
+                    ${arr[index]}
+                    <button onclick= "remove(${index})" class="hover btn btn-danger text-white   ">
+                        🗑
+                    </button>
+                </div>
+         </div>
+         `
+        }
+
+
+
+    }
+    function remove(remove) {
+        arr.splice(remove, 1)
+        displayResult()
+
+        a--
+        if (a > 1) {
+            document.getElementById("multiple").innerHTML = "tasks"
+        } else {
+            document.getElementById("multiple").innerHTML = "task"
+        }
+        document.getElementById("inc").innerHTML = a
+
+        localStorage.setItem("todo", JSON.stringify(arr));
+    }
+    function clearAll() {
+        arr.length = 0
+        a = 0
+        document.getElementById("parent-div").innerHTML = ""
+        document.getElementById("inc").innerHTML = a
+        document.getElementById("input").value = " "
+        localStorage.setItem("todo", JSON.stringify(arr));
+
+
+    }
+    window.addEventListener("load", () => {
+        displayResult()
+        a = arr.length
+        if (a > 1) {
+            document.getElementById("multiple").innerHTML = "tasks"
+        } else {
+            document.getElementById("multiple").innerHTML = "task"
+        }
+        document.getElementById("inc").innerHTML = a
+
+
+    })
+
+
+
+
+</script>
+
+</html>

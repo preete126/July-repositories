@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>calc</title>
+    <style>
+        #screen {
+            width: 200px;
+            height: 50px;
+            border: none;
+            outline: none;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            padding-left: 5px;
+            background-color: white;
+        }
+     
+        
+        #cont {
+            
+            border-radius: 10px;
+            width: 200px;
+            background-color: white;
+            height: 60px;
+            outline: 2px dotted black;
+        }
+        #res {
+            background-color: white;
+            width: 267px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            height: 25px;
+            padding-left: 5px;
+
+        }
+           
+        
+    </style>
+</head>
+<body>
+    
+    <div class="mx-auto " style=" width: 210px; padding-left: 4px; background-color: burlywood; border-radius: 8px;">
+       <div id="cont">
+          <input type="text" id="screen" readonly>
+          <input type="text" id="screen2" class="d-none" readonly>
+
+
+            
+
+           
+       </div>
+       <div >
+            <button onclick="theOn()" class="btn btn-outline-light p-2 mt-3 text-center" >On/Off</button>
+            <button onclick="add('✓')" class="btn btn-light   mt-4 mb-2">✓</button>
+        </div>
+       
+            <button onclick="addnumber(1)" class="btn btn-light ">1</button>
+            <button onclick="addnumber(2)" class="btn btn-light ">2</button>
+            <button onclick="addnumber(3)" class="btn btn-light ">3</button>
+            <button  onclick="add('+')"  class="btn btn-light  ">+</button>
+            <button onclick="add('-')" class="btn btn-light   \ ">-</button>
+
+       <br><br>
+        
+            <button onclick="addnumber(4)" class="btn btn-light  ">4</button>
+            <button onclick="addnumber(5)" class="btn btn-light ">5</button>
+            <button onclick="addnumber(6)" class="btn btn-light ">6</button>
+            <button onclick="add('/')" class="btn btn-light  ">/</button>
+            <button onclick="add('*')" class="btn btn-light  \ ">x</button>
+
+       <br><br>
+         
+            <button onclick="addnumber(7)" class="btn btn-light  ">7</button>
+            <button onclick="addnumber(8)" class="btn btn-light ">8</button>
+            <button onclick="addnumber(9)" class="btn btn-light ">9</button>
+            <button onclick="addnumber('.')" class="btn btn-light  ">.</button>
+            <button onclick="equate('=')" class="btn btn-light    \">=</button>
+
+
+       <br><br>
+        
+            <button onclick="addnumber(0)" class="btn btn-light   ">0</button>
+            <button onclick="remove1()" class="btn btn-light  ">D</button>
+            <button onclick="removeall()" class="btn btn-light  ">C</button>
+            <button onclick="addnumber('>')" class="btn btn-light  ">></button>
+            <button onclick="add('**')" class="btn btn-light   \">^</button>
+            
+
+
+
+      
+      
+
+    </div>
+
+</body>
+<script>
+    let first_number = 0;
+    let second_number = 0;
+    let operator = "";
+    let on_off = false;
+    let screen = document.getElementById('screen')
+    let screen2 = document.getElementById('screen2')
+
+    screen2.hidden = true;
+    screen.hidden = true;
+
+    function theOn() {
+        if (on_off === false) {
+            screen.innerHTML = null;
+            screen2.hidden = false;
+            screen.hidden = false;
+            console.log(on_off);
+            on_off = true;
+        document.getElementById("screen").value = " "
+
+        } else {
+            screen2.hidden = true;
+            screen.hidden = true;
+            console.log(on_off);
+            on_off = false;
+        document.getElementById("screen").value = " "
+
+        }
+         
+    }
+
+    function removeall() {
+        document.getElementById("screen").value = " "
+        document.getElementById("screen2").value = " "
+
+        
+
+    }
+
+    function addnumber(ScreenNumber) {
+        document.getElementById("screen").value += ScreenNumber 
+        
+    }
+    function add(ScreenNum) {
+       
+        operator = ScreenNum;
+        first_number = Number(document.getElementById("screen").value);
+        document.getElementById("screen").value = "";
+    }
+
+    function remove1() {
+        let ScreenValue = document.getElementById("screen");
+        let lenghtOfString = String(ScreenValue.value).length;
+        let partOfString = String(ScreenValue.value).slice(0, lenghtOfString - 1);
+        document.getElementById("screen").value = partOfString;
+
+    } 
+   
+   function equate() {
+   
+    second_number = Number(document.getElementById("screen").value) 
+    if(operator == "+"){
+        document.getElementById("screen").value = first_number + second_number
+    } else if(operator == "-"){
+        document.getElementById("screen").value = first_number - second_number
+    }else if(operator == "*"){
+        document.getElementById("screen").value = first_number * second_number
+    }else if(operator == "/"){
+        document.getElementById("screen").value = first_number / second_number
+    }else if(operator == "**"){
+        document.getElementById("screen").value = first_number ** second_number
+    }else if(operator == "-"){
+        document.getElementById("screen").value = first_number - second_number
+    }else if(operator == "✓"){
+        document.getElementById('screen').value = Math.sqrt(first_number);
+    }else {
+        document.getElementById("screen").value = "Maths error!"
+    }
+
+   }
+
+    
+
+
+
+    // function addnumber2() {
+    //     document.getElementById("screen").value =  document.getElementById("screen").value + 2
+    // }
+    // function addnumber3() {
+    //     document.getElementById("screen").value =  document.getElementById("screen").value + 3
+    // }
+    // function addnumber4() {
+    //     document.getElementById("screen").value =  document.getElementById("screen").value + 4
+    // }
+    // function addnumber5() {
+    //     document.getElementById("screen").value =  document.getElementById("screen").value + 5
+    // }
+    // function addnumber6() {
+    //     document.getElementById("screen").value =  document.getElementById("screen").value + 6
+    // }
+    // function addnumber7() {
+    //     document.getElementById("screen").value =  document.getElementById("screen").value + 7
+    // }
+    // function addnumber8() {
+    //     document.getElementById("screen").value =  document.getElementById("screen").value + 8
+    // }
+    // function addnumber9() {
+    //     document.getElementById("screen").value =  document.getElementById("screen").value + 9
+    // }
+    // function addnumber0() {
+    //     document.getElementById("screen").value =  document.getElementById("screen").value + 0
+    // }
+</script>
+</html>

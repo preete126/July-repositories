@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic light</title>
+    <style>
+        .red {
+            width: 80px;
+            height: 80px;
+            border-radius: 50% ;
+            border: 1px solid red;
+            background-color: red;
+        }
+        .red.hide{
+            background-color: white;
+        }
+        .green.hide{
+            background-color: green;
+        }
+        .yellow.hide{
+            background-color: yellow;
+        }
+        .green {
+            width: 80px;
+            height: 80px;
+            border-radius: 50% ;
+            border: 1px solid green;
+            background-color: white;
+        }
+        .yellow {
+            width: 80px;
+            height: 80px;
+            border-radius: 50% ;
+            border: 1px solid yellow;
+            background-color: white;
+        }
+        .parent{
+            background-color: black;
+            width: 120px;
+            height: 250px;
+            border-radius: 10px;
+            margin: auto;
+            padding-left: 35px;
+        }
+        .light{
+            width: 80px;
+            height: 40px;
+            background-color: black;
+            color: white;
+            margin: auto;
+            padding-left: 20px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            font-size: 20px;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="light">
+        <span id="min">00</span>
+        <span>:</span>
+        <span id="sec">00</span>
+
+    </div>
+   <div class="parent">
+        <div class="red"></div>
+        <div class="yellow"></div>
+        <div class="green"></div>
+   </div>
+       
+        
+
+
+</body>
+<script>
+    let red = document.querySelector(".red")
+    let yellow = document.querySelector(".yellow")
+    let green = document.querySelector(".green")
+    let minute = document.getElementById("min")
+    let second = document.getElementById("sec")
+
+    let min = 1;
+    let sec = 0;
+    let light = "red";
+
+    setInterval(() => {
+        if (sec > 0) {
+            sec--
+        } else if (min > 0 && sec == 0) {
+            sec = 14
+            min--
+        }
+        timeAll()
+        console.log(min)
+        console.log(min)
+        minute.innerHTML = min;
+        second.innerHTML = sec;
+
+    }, 1000);
+
+    function timeAll() {
+        
+        if (min == 0 && sec == 5 && light == "red") {
+         yellow.classList.add("hide")
+         red.classList.add("hide")
+        //  green.classList.add("hide")
+        } else if (min == 0 && sec == 0 && light == "red"){
+            
+         red.classList.add("hide")
+         yellow.classList.remove("hide")
+         green.classList.add("hide")
+        //  console.log(timer)
+            light = "green"
+            min = 1;
+            sec = 0;
+
+        }else  if (min == 0 && sec == 5 ) {
+         yellow.classList.remove("hide")
+         red.classList.add("hide")
+         
+        }
+        else if (min == 0 && sec == 0 && light == "green" ) {
+           
+            red.classList.remove("hide")
+            yellow.classList.remove("hide")
+            green.classList.remove("hide")
+            light = "red"
+
+            min = 1;
+            sec = 0;
+        }
+        
+    }
+
+
+
+</script>
+</html>
